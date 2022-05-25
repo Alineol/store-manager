@@ -6,6 +6,12 @@ const getAll = async () => {
  return checkLenght(productsData, 'produtos');
 };
 
+const getById = async (id) => {
+  const [productData] = await productsModel.getById(id);
+  return productData;
+};
+
 module.exports = {
   getAll,
+  getById,
 };
