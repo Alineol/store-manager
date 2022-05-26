@@ -1,14 +1,16 @@
 const productsModel = require('../models/productsModel');
-const { checkLenght } = require('../helpers.js/index');
+const { checkLenght, checkId } = require('../helpers.js/index');
 
 const getAll = async () => {
   const [productsData] = await productsModel.getAll();
- return checkLenght(productsData, 'produtos');
+  const result = checkLenght(productsData, 'produtos');
+ return result;
 };
 
 const getById = async (id) => {
   const [productData] = await productsModel.getById(id);
-  return productData;
+  const result = checkId(productData, 'Product');
+  return result;
 };
 
 module.exports = {
