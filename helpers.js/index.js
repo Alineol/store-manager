@@ -1,18 +1,19 @@
 const checkLenght = (array, name) => {
 if (array.lenght === 0) {
-  return { s: 404, message: `Não existem ${name} cadastrado(s)` };
+  return { code: 404, message: `Não existem${name} cadastrado(as)` };
 } 
-return { s: 200, message: array };
+return array;
 };
 
-// const checkId = (result, name) => {
-//   if (result[0]) {
-//     const response = result[0];
-//     return { s: 200, response };
-//   }
-//   return { s: 200, message: `${name} not found` };
-// };
+const checkId = (result, name) => {
+  console.log(result);
+  if (result[0]) {
+    return result;
+  }
+  return { code: 404, message: `${name} not found` };
+};
 
 module.exports = {
   checkLenght,
+  checkId,
 };
