@@ -1,9 +1,9 @@
 const salessModel = require('../models/salesModel');
-const { checkLenght, checkId } = require('../helpers.js/index');
+const { checkLength, checkId } = require('../helpers.js/index');
 
 const getAll = async () => {
   const [salessData] = await salessModel.getAll();
-  const result = checkLenght(salessData, 'vendas');
+  const result = checkLength(salessData, 'vendas');
  return result;
 };
 
