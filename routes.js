@@ -1,4 +1,6 @@
 const express = require('express');
+const { validadeProductsBody } = require('./middlewares/products');
+// const { validadeSalesBody } = require('./middlewares/sales');
 
 const route = express.Router();
 
@@ -12,6 +14,10 @@ route.get('/products', productsController.getAll);
 route.get('/sales/:id', salesController.getById);
 
 route.get('/sales', salesController.getAll);
+
+route.post('/products', validadeProductsBody, productsController.create);
+
+// route.post('/sales', validadeSalesBody, salesController.create);
 
 // route.get('sales',)
 
