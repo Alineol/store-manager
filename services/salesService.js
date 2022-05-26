@@ -1,14 +1,16 @@
 const salessModel = require('../models/salesModel');
-const { checkLenght } = require('../helpers.js/index');
+const { checkLenght, checkId } = require('../helpers.js/index');
 
 const getAll = async () => {
   const [salessData] = await salessModel.getAll();
- return checkLenght(salessData, 'vendas');
+  const result = checkLenght(salessData, 'vendas');
+ return result;
 };
 
 const getById = async (id) => {
   const [salesData] = await salessModel.getById(id);
-  return salesData;
+  const result = checkId(salesData, 'Sale');
+  return result;
 };
 
 module.exports = {
