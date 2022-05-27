@@ -12,8 +12,20 @@ const getAll = () => connection.execute(`${query1}${query2}${query3};`);
     const query = `${query1b}${query2}${query3}${query4};`;
     return connection.execute(query, [id]);
   };
+const create = async (sales) => {
+  const queryA = 'INSERT INTO sales (date) values(CURRENT_TIMESTAMP)';
+  const [responseA] = await connection.execute(queryA);
+  const id = responseA.insertId;
+  const queryB = 'INSERT INTO sales_products (sale_id, product_id, quantity ) VALUES (?, ?, ?)';
+  await sales.forEach((sale) => {
+    const { productId, quantity } = sale;
+     connection.execute(queryB, [id, productId, quantity]);
+  });
+  return id;
+};
 
 module.exports = {
   getAll,
   getById,
+  create,
 };
