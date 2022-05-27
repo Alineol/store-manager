@@ -16,8 +16,16 @@ const getAll = () => connection.execute(
     return result.insertId;
   };
 
+  const edit = async (id, name, quantity) => {
+    const query = `UPDATE products SET name = '${name}', quantity = ${quantity} WHERE id = ${id};`;
+    const [result] = await connection.execute(query);
+    console.log(result);
+    return result;
+  };
+
 module.exports = {
   getAll,
   getById,
   create,
+  edit,
 };
