@@ -14,7 +14,7 @@ describe('Busca todos os produtos no BD(service)', () => {
       productsModel.getAll.restore();
     })
 
-    it('retorna um objeto', async() => {
+    it('retorna um objeto com as chaves code e message', async() => {
       const response = await productsService.getAll();
       expect(response).to.be.an('object');
       expect(response).to.has.keys('code', 'message')
@@ -43,7 +43,7 @@ describe('Busca todos os produtos no BD(service)', () => {
   })
 })
 
-describe('busca produto pelo id(service)', () => {
+describe('Busca produto pelo id(service)', () => {
   describe('quando o produto não existe', () => {
     before(() => {
       const resultExecute = [[]];
@@ -70,10 +70,61 @@ describe('busca produto pelo id(service)', () => {
       productsModel.getById.restore();
     })
 
-    it('retorna um array não vazio', async() => {
+    it('retorna um objeto com as chaves id, name e quantity', async() => {
       const response = await productsService.getById();
       expect(response).to.be.an('object');
       expect(response).to.has.keys('id', 'name', 'quantity')
     })
   })
+})
+
+describe('Edita um produto com sucesso', ()=> {
+  before(() => {
+    const resultExecute = [{affectedRows: 1}];
+    sinon.stub(productsModel, 'getById').resolves([[123]])
+    sinon.stub(productsModel, 'edit').resolves({affectedRows: 1})
+  });
+  after(() => {
+    productsModel.getById.restore()
+    productsModel.edit.restore();
+  })
+
+  it('retorna um objeto com as chaves id, name e quantity', async() => {
+    const response = await productsService.edit('chapéu', 2, 1);
+    expect(response).to.be.an('object');
+    expect(response).to.has.keys('id', 'name', 'quantity')
+  })
+})
+
+describe('Deleta um produto', ()=> {
+
+  describe('- ao tentar deletar um produto que não existe:', () => {
+    before(() => {
+      sinon.stub(productsModel, 'getById').resolves([{ code: 404, message: 'Product not found' }])
+    });
+    after(() => {
+      productsModel.getById.restore();
+    })
+  
+    it('retorna um objeto com as chaves code e message', async() => {
+      const response = await productsService.deleteProduct(1);
+      expect(response).to.be.an('object');
+      expect(response).to.has.keys('code', 'message')
+    })
+  })
+
+  describe ('-ao tentar deletar um produto que existe:', () => {
+    before(() => {
+      sinon.stub(productsModel, 'getById').resolves([[123]])
+    });
+    after(() => {
+      productsModel.getById.restore();
+    })
+    it('retorna um array não vazio', async() => {
+      const response = await productsService.deleteProduct(1);
+      expect(response).to.be.an('array');
+      expect(response).to.not.be.empty
+    })
+  })
+ 
 })
