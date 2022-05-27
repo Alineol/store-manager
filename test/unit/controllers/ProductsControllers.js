@@ -5,9 +5,9 @@ const productsController = require('../../../controllers/productsController');
 const response = {}
 const request = {}
 
-describe('Busca todos os produtos no BD(controller)', () => {
+describe('1- Busca todos os produtos no BD(controller)', () => {
 
-  describe('quando não existe nenhum produto no BD', () => {
+  describe('- quando não existe nenhum produto no BD:', () => {
     before(() => {
 
     response.status = sinon.stub().returns(response)
@@ -29,7 +29,7 @@ describe('Busca todos os produtos no BD(controller)', () => {
   })
 
 
-  describe('quando existem produtos no BD', () => {
+  describe('- quando existem produtos no BD:', () => {
 
     before(() => {
       response.status = sinon.stub().returns(response);
@@ -60,8 +60,8 @@ describe('Busca todos os produtos no BD(controller)', () => {
   })
 })
 
-describe('Busca produtos pelo id(controler)', () => {
-  describe('Quando é encontrado um produto', () => {
+describe('2- Busca produtos pelo id(controler)', () => {
+  describe('- quando é encontrado um produto:', () => {
 
     before(() => {
       request.params = { id:1}
@@ -81,13 +81,12 @@ describe('Busca produtos pelo id(controler)', () => {
 
     it('é chamado status 200 com um objeto no json', async() => {
       await productsController.getById(request, response);
-      console.log(response.status)
       expect(response.status.calledWith(200)).to.be.equal(true);
       expect(response.json.calledWith(sinon.match.object)).to.be.equal(true);
     })
   })
 
-  describe('quando não é encontrado um produto', () => {
+  describe('- quando não é encontrado um produto:', () => {
     before(() => {
       request.params = { id:8}
       response.status = sinon.stub().returns(response);
