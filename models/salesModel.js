@@ -24,8 +24,18 @@ const create = async (sales) => {
   return id;
 };
 
+const edit = async (sale, id) => {
+  console.log('model');
+  const { quantity, productId } = sale[0];
+  const query = `UPDATE sales_products SET product_id = ? , quantity = ? WHERE sale_id = ${id};`;
+  const response = await connection.execute(query, [productId, quantity]);
+  console.log(response);
+   return connection.execute(query, [productId, quantity]);
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  edit,
 };
