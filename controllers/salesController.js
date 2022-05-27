@@ -17,13 +17,21 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   const sales = req.body;
-  console.log(sales);
   const response = await salesService.create(sales);
   res.status(201).json(response);
+};
+
+const edit = async (req, res) => {
+  console.log('controller');
+  const sale = req.body;
+  const { id } = req.params;
+  const response = await salesService.edit(sale, id);
+  res.status(200).json(response);
 };
 
 module.exports = {
   getById,
   getAll,
   create,
+  edit,
 };
