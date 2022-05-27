@@ -11,11 +11,13 @@ route.get('/products/:id', productsController.getById);
 
 route.get('/products', productsController.getAll);
 
+route.post('/products', validadeProductsBody, productsController.create);
+
+route.put('/products/:id', validadeProductsBody, productsController.edit);
+
 route.get('/sales/:id', salesController.getById);
 
 route.get('/sales', salesController.getAll);
-
-route.post('/products', validadeProductsBody, productsController.create);
 
 // route.post('/sales', validadeSalesBody, salesController.create);
 
