@@ -41,7 +41,7 @@ describe('Busca todas as vendas no BD(model)', () => {
   })
 })
 
-describe('busca venda pelo id', () => {
+describe('Busca venda pelo id', () => {
   describe('quando a venda não existe', () => {
     before(() => {
       const resultExecute = [[]];
@@ -79,4 +79,37 @@ describe('busca venda pelo id', () => {
       expect(response).to.not.be.empty;
     })
   })
+})
+
+describe('Ao editar uma venda com sucesso:', () => {
+  before(() => {
+    const resultExecute = [[{affectedRows: 1}]];
+
+    sinon.stub(connection, 'execute').resolves(resultExecute)
+  });
+  after(() => {
+    connection.execute.restore();
+  })
+  it('retorna um array não vazio', async() => {
+    const [response] = await salesModel.edit([{quantity: 1, productId:2}], 1);
+    expect(response).to.be.an('array');
+    expect(response).to.not.be.empty;
+  })
+})
+
+describe('Ao deletetar uma venda com sucesso:', () => {
+  before(() => {
+    const resultExecute = [[{affectedRows: 1}]];
+
+    sinon.stub(connection, 'execute').resolves(resultExecute)
+  });
+  after(() => {
+    connection.execute.restore();
+  })
+  it('retorna um array não vazio', async() => {
+    const [response] = await salesModel.deleteSale(1);
+    expect(response).to.be.an('array');
+    expect(response).to.not.be.empty;
+  })
+
 })
