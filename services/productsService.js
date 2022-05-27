@@ -34,9 +34,18 @@ const edit = async (name, quantity, id) => {
   }
 };
 
+const deleteProduct = async (id) => {
+  const find = await getById(id);
+  if (find.message) {
+    return find;
+  }
+   return productsModel.deleteProduct(id);
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   edit,
+  deleteProduct,
 };
