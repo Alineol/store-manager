@@ -23,8 +23,20 @@ const create = async (name, quantity) => {
   return { id, name, quantity };
 };
 
+const edit = async (name, quantity, id) => {
+  const find = await getById(id);
+  if (find.message) {
+    return find;
+  }
+  const response = await productsModel.edit(id, name, quantity);
+  if (response.affectedRows === 1) {
+    return { name, quantity, id };
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  edit,
 };
