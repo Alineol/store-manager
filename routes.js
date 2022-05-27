@@ -25,6 +25,8 @@ route.post('/sales', validadeSalesBody, salesController.create);
 
 route.put('/sales/:id', validadeSalesBody, salesController.edit);
 
+route.delete('/sales/:id', salesController.deleteSale);
+
 // route.post('/sales', validadeSalesBody, salesController.create);
 
 // route.get('sales',)
