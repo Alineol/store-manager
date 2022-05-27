@@ -15,6 +15,8 @@ route.post('/products', validadeProductsBody, productsController.create);
 
 route.put('/products/:id', validadeProductsBody, productsController.edit);
 
+route.delete('/products/:id', productsController.deleteProduct);
+
 route.get('/sales/:id', salesController.getById);
 
 route.get('/sales', salesController.getAll);
