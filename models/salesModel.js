@@ -12,6 +12,7 @@ const getAll = () => connection.execute(`${query1}${query2}${query3};`);
     const query = `${query1b}${query2}${query3}${query4};`;
     return connection.execute(query, [id]);
   };
+  
 const create = async (sales) => {
   const queryA = 'INSERT INTO sales (date) values(CURRENT_TIMESTAMP)';
   const [responseA] = await connection.execute(queryA);
@@ -25,7 +26,6 @@ const create = async (sales) => {
 };
 
 const edit = async (sale, id) => {
-  console.log('model');
   const { quantity, productId } = sale[0];
   const query = `UPDATE sales_products SET product_id = ? , quantity = ? WHERE sale_id = ${id};`;
   const response = await connection.execute(query, [productId, quantity]);
