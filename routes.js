@@ -23,6 +23,8 @@ route.get('/sales', salesController.getAll);
 
 route.post('/sales', validadeSalesBody, salesController.create);
 
+route.put('/sales/:id', validadeSalesBody, salesController.edit);
+
 // route.post('/sales', validadeSalesBody, salesController.create);
 
 // route.get('sales',)
