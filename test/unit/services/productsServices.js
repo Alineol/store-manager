@@ -43,37 +43,37 @@ describe('Busca todos os produtos no BD(service)', () => {
   })
 })
 
-// describe('busca produto pelo id', () => {
-//   describe('quando o produto não existe', () => {
-//     before(() => {
-//       const resultExecute = [[]];
+describe('busca produto pelo id(service)', () => {
+  describe('quando o produto não existe', () => {
+    before(() => {
+      const resultExecute = [[]];
 
-//       sinon.stub(connection, 'execute').resolves(resultExecute)
-//     });
-//     after(() => {
-//       connection.execute.restore();
-//     })
-//     it('retonar um array vazio', async() => {
-//       const [response] = await productsService.getById(1);
-//       expect(response).to.be.an('array');
-//       expect(response).to.be.empty;
-//     })
-//   })
+      sinon.stub(productsModel, 'getById').resolves(resultExecute)
+    });
+    after(() => {
+      productsModel.getById.restore();
+    })
+    it('retonar um array vazio', async() => {
+      const response = await productsService.getById(1);
+      expect(response).to.be.an('object');
+      expect(response).to.has.keys('code', 'message')
+    })
+  })
 
-//   describe('quando o produto existe', () => {
-//     before(() => {
-//       const resultExecute = [{id: 1, name:'pantufa', quantity:10}];
+  describe('quando o produto existe', () => {
+    before(() => {
+      const result = [[{id: 1, name:'pantufa', quantity:10}]];
 
-//       sinon.stub(connection, 'execute').resolves(resultExecute)
-//     });
-//     after(() => {
-//       connection.execute.restore();
-//     })
+      sinon.stub(productsModel, 'getById').resolves(result)
+    });
+    after(() => {
+      productsModel.getById.restore();
+    })
 
-//     it('retorna um array não vazio', async() => {
-//       const response = await productsService.getById();
-//       expect(response).to.be.an('array');
-//       expect(response).to.not.be.empty;
-//     })
-//   })
-// })
+    it('retorna um array não vazio', async() => {
+      const response = await productsService.getById();
+      expect(response).to.be.an('object');
+      expect(response).to.has.keys('id', 'name', 'quantity')
+    })
+  })
+})
