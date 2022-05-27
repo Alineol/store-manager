@@ -21,8 +21,18 @@ const create = async (sales) => {
   };
 };
 
+const edit = async (itemUpdated, saleId) => {
+  console.log('service');
+  await salessModel.edit(itemUpdated, saleId);
+  return {
+    saleId,
+    itemUpdated,
+  };
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  edit,
 };
