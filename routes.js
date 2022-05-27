@@ -1,6 +1,6 @@
 const express = require('express');
 const { validadeProductsBody } = require('./middlewares/products');
-// const { validadeSalesBody } = require('./middlewares/sales');
+const { validadeSalesBody } = require('./middlewares/sales');
 
 const route = express.Router();
 
@@ -20,6 +20,8 @@ route.delete('/products/:id', productsController.deleteProduct);
 route.get('/sales/:id', salesController.getById);
 
 route.get('/sales', salesController.getAll);
+
+route.post('/sales', validadeSalesBody, salesController.create);
 
 // route.post('/sales', validadeSalesBody, salesController.create);
 
