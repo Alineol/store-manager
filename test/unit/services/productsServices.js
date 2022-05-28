@@ -78,7 +78,7 @@ describe('Busca produto pelo id(service)', () => {
   })
 })
 
-describe('Edita um produto com sucesso', ()=> {
+describe('Edita um produto com sucesso(service)', ()=> {
   before(() => {
     const resultExecute = [{affectedRows: 1}];
     sinon.stub(productsModel, 'getById').resolves([[123]])
@@ -96,7 +96,7 @@ describe('Edita um produto com sucesso', ()=> {
   })
 })
 
-describe('Deleta um produto', ()=> {
+describe('Deleta um produto(service)', ()=> {
 
   describe('- ao tentar deletar um produto que não existe:', () => {
     before(() => {
@@ -113,12 +113,14 @@ describe('Deleta um produto', ()=> {
     })
   })
 
-  describe ('-ao tentar deletar um produto que existe:', () => {
+  describe('-ao tentar deletar um produto que existe:', () => {
     before(() => {
       sinon.stub(productsModel, 'getById').resolves([[123]])
+      sinon.stub(productsModel, 'deleteProduct').resolves([[{affectedRows: 1}]])
     });
     after(() => {
       productsModel.getById.restore();
+      productsModel.deleteProduct.restore();
     })
     it('retorna um array não vazio', async() => {
       const response = await productsService.deleteProduct(1);
