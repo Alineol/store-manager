@@ -41,8 +41,8 @@ describe('Busca todas as vendas no BD(model)', () => {
   })
 })
 
-describe('Busca venda pelo id', () => {
-  describe('quando a venda não existe', () => {
+describe('Busca venda pelo id(model)', () => {
+  describe('-quando a venda não existe:', () => {
     before(() => {
       const resultExecute = [[]];
 
@@ -58,7 +58,7 @@ describe('Busca venda pelo id', () => {
     })
   })
 
-  describe('quando a venda existe', () => {
+  describe('-quando a venda existe:', () => {
     before(() => {
       const resultExecute = [{
         saleId: 1,
@@ -81,7 +81,7 @@ describe('Busca venda pelo id', () => {
   })
 })
 
-describe('Ao editar uma venda com sucesso:', () => {
+describe('Ao editar uma venda com sucesso(model):', () => {
   before(() => {
     const resultExecute = [[{affectedRows: 1}]];
 
@@ -97,7 +97,7 @@ describe('Ao editar uma venda com sucesso:', () => {
   })
 })
 
-describe('Ao deletetar uma venda com sucesso:', () => {
+describe('Ao deletetar uma venda com sucesso(model):', () => {
   before(() => {
     const resultExecute = [[{affectedRows: 1}]];
 

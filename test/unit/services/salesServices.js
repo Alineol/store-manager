@@ -55,7 +55,7 @@ describe('Busca todos as vendas no BD(service)', () => {
 })
 
 describe('Busca vendas pelo id(service)', () => {
-  describe('-quando o produto não existe:', () => {
+  describe('-quando as vendas não existem:', () => {
     before(() => {
       const resultExecute = [[]];
 
@@ -64,7 +64,7 @@ describe('Busca vendas pelo id(service)', () => {
     after(() => {
       salesModel.getById.restore();
     })
-    it('retonar um array vazio', async() => {
+    it('retonar um objeto com as chaves code e message', async() => {
       const response = await salesService.getById(1);
       expect(response).to.be.an('object');
       expect(response).to.has.keys('code', 'message')

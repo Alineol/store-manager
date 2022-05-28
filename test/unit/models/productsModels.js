@@ -4,7 +4,7 @@ const connection = require ('../../../models/connection');
 const productsModel = require('../../../models/productsModel')
 
 describe('Busca todos os produtos no BD(model)', () => {
-  describe('quando não existe nenhum produto no BD', () => {
+  describe('-quando não existe nenhum produto no BD:', () => {
     before(() => {
       const resultExecute = [[]];
 
@@ -20,7 +20,7 @@ describe('Busca todos os produtos no BD(model)', () => {
       expect(response).to.be.empty;
     })
   })
-  describe('quando existem produtos no BD', () => {
+  describe('-quando existem produtos no BD:', () => {
     before(() => {
       const resultExecute = [{id: 1, name:'pantufa', quantity:10}];
 
@@ -38,8 +38,8 @@ describe('Busca todos os produtos no BD(model)', () => {
   })
 })
 
-describe('busca produto pelo id(model)', () => {
-  describe('quando o produto não existe', () => {
+describe('Busca produto pelo id(model)', () => {
+  describe('-quando o produto não existe:', () => {
     before(() => {
       const resultExecute = [[]];
 
@@ -55,7 +55,7 @@ describe('busca produto pelo id(model)', () => {
     })
   })
 
-  describe('quando o produto existe', () => {
+  describe('-quando o produto existe:', () => {
     before(() => {
       const resultExecute = [{id: 1, name:'pantufa', quantity:10}];
 
@@ -73,7 +73,7 @@ describe('busca produto pelo id(model)', () => {
   })
 })
 
-describe('Ao editar um produto com sucesso:', () => {
+describe('Ao editar um produto com sucesso(model):', () => {
   before(() => {
     const resultExecute = [[{affectedRows: 1}]];
 
@@ -89,7 +89,7 @@ describe('Ao editar um produto com sucesso:', () => {
   })
 })
 
-describe('Ao deletar um produto com sucesso:', () => {
+describe('Ao deletar um produto com sucesso(model):', () => {
   before(() => {
     const resultExecute = [[{affectedRows: 1}]];
 
@@ -105,7 +105,7 @@ describe('Ao deletar um produto com sucesso:', () => {
   })
 })
 
-describe('Ao criar um produto com sucesso:', () => {
+describe('Ao criar um produto com sucesso(model):', () => {
   before(() => {
     sinon.stub(connection, 'execute').resolves([{insertId: 1}])
   });
@@ -115,6 +115,5 @@ describe('Ao criar um produto com sucesso:', () => {
   it('retorna o numero do novo id criado', async() => {
     const response = await productsModel.create('name', 2);
     expect(response).to.be.an('number');
-    // expect(response).to.not.be.empty;
   })
 })

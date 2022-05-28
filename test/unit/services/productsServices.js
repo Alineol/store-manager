@@ -5,7 +5,7 @@ const productsModel = require('../../../models/productsModel')
 
 describe('Busca todos os produtos no BD(service)', () => {
 
-  describe('quando não existe nenhum produto no BD', () => {
+  describe('-quando não existe nenhum produto no BD:', () => {
     before(() => {
       const result = [[]]
       sinon.stub(productsModel, 'getAll').resolves(result)
@@ -22,7 +22,7 @@ describe('Busca todos os produtos no BD(service)', () => {
   })
 
 
-  describe('quando existem produtos no BD', () => {
+  describe('-quando existem produtos no BD:', () => {
     before(() => {
       const result = [[
           { id: 1, name: 'Martelo de Thor', quantity: 10 },
@@ -44,7 +44,7 @@ describe('Busca todos os produtos no BD(service)', () => {
 })
 
 describe('Busca produto pelo id(service)', () => {
-  describe('quando o produto não existe', () => {
+  describe('-quando o produto não existe:', () => {
     before(() => {
       const resultExecute = [[]];
 
@@ -60,7 +60,7 @@ describe('Busca produto pelo id(service)', () => {
     })
   })
 
-  describe('quando o produto existe', () => {
+  describe('-quando o produto existe:', () => {
     before(() => {
       const result = [[{id: 1, name:'pantufa', quantity:10}]];
 
@@ -78,7 +78,7 @@ describe('Busca produto pelo id(service)', () => {
   })
 })
 
-describe('Edita um produto com sucesso(service)', ()=> {
+describe('Edita um produto com sucesso(service):', ()=> {
   before(() => {
     const resultExecute = [{affectedRows: 1}];
     sinon.stub(productsModel, 'getById').resolves([[123]])

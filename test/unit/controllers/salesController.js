@@ -86,14 +86,14 @@ describe(' Busca vendas pelo id(controler)', () => {
       salesService.getById.restore()
     })
 
-    it('é chamado status 200 com um objeto no json', async() => {
+    it('é chamado status 200 com um array no json', async() => {
       await salesController.getById(request, response);
       expect(response.status.calledWith(200)).to.be.equal(true);
       expect(response.json.calledWith(sinon.match.array)).to.be.equal(true);
     })
   })
 
-  describe('- quando não é encontrado venda(s) pelo id:', () => {
+  describe('- quando vendas não são encontradas pelo id:', () => {
     before(() => {
       request.params = { id:8}
       response.status = sinon.stub().returns(response);
