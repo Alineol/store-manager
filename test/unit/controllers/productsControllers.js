@@ -2,10 +2,10 @@ const sinon = require('sinon');
 const {expect} = require ('chai');
 const productsService = require('../../../services/productsService')
 const productsController = require('../../../controllers/productsController');
-const response = {}
-const request = {}
 
 describe('1- Busca todos os produtos no BD(controller)', () => {
+  const response = {}
+  const request = {}
 
   describe('- quando não existe nenhum produto no BD:', () => {
     before(() => {
@@ -61,6 +61,8 @@ describe('1- Busca todos os produtos no BD(controller)', () => {
 })
 
 describe('2- Busca produtos pelo id(controler)', () => {
+  const response = {}
+  const request = {}
   describe('- quando é encontrado um produto:', () => {
 
     before(() => {
@@ -73,6 +75,7 @@ describe('2- Busca produtos pelo id(controler)', () => {
         "name": "Martelo de Thor",
         "quantity": 10
       }])
+      
     })
 
     after(() => {
@@ -104,5 +107,53 @@ describe('2- Busca produtos pelo id(controler)', () => {
       expect(response.status.calledWith(404)).to.be.equal(true);
       expect(response.json.calledWith(sinon.match.object)).to.be.equal(true);
     })
+  })
+})
+
+describe('3- Ao criar um novo produto', () => {
+  const response = {}
+  const request = {}
+
+  describe('-ao cria um produto com um nome que já existe:', () => {
+    before(() => {
+      request.body = { name: "Traje de encolhimento", quantity: 10 }
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns()
+      sinon.stub(productsService, 'create').resolves({code: 409, message: 'Product already exists'})
+    });
+    after(() => {
+      productsService.create.restore();
+    })
+
+    it('é chamado status 409 com um objeto no json', async() => {
+      await productsController.create(request, response);
+      expect(response.status.calledWith(409)).to.be.equal(true);
+      expect(response.json.calledWith(sinon.match.object)).to.be.equal(true);
+    })
+  })
+
+  describe('-ao criar um produto com sucesso', () => {
+    before(() => {
+          request.body = { name: "chapeu maluco", quantity: 10 }
+          response.status = sinon.stub().returns(response);
+          response.json = sinon.stub().returns()
+          sinon.stub(productsService, 'create').resolves(
+            {
+              "id": 3,
+              "name": "chapeu maluco",
+              "quantity": 10
+            },
+          )
+        });
+        after(() => {
+          productsService.create.restore();
+        })
+
+        it('é chamado status 200 com um objeto no json', async() => {
+          await productsController.create(request, response);
+          console.log(response.status)
+          expect(response.status.calledWith(201)).to.be.equal(true);
+          expect(response.json.calledWith(sinon.match.object)).to.be.equal(true);
+        })
   })
 })
