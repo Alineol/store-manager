@@ -19,9 +19,9 @@ const create = async (req, res) => {
   const sales = req.body;
   const response = await salesService.create(sales);
   if (response.message) {
-    res.status(response.code).json({ message: response.message });
+     return res.status(response.code).json({ message: response.message });
   }
-  res.status(201).json(response);
+  return res.status(201).json(response);
 };
 
 const edit = async (req, res) => {
