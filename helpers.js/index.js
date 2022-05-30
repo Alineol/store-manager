@@ -6,14 +6,28 @@ return array;
 };
 
 const checkId = (result, name) => {
-  if (result.length > 1) {
+  if (result.length >= 1) {
     return result;
-  }
-  if (result.length === 1) {
-    return result[0];
   }
   return { code: 404, message: `${name} not found` };
 };
+
+// const checkProductName = async (getAll, name) => {
+//   const products = await getAll();
+//   if (products.some((product) => product.name === name)) {
+//     return { code: 409, message: 'Product already exists' };
+//   }
+// };
+// const producstService = require('./productsService');
+
+// const checkQuant = async (sales) => sales.map(async (sale) => {
+//    const id = sale.productId;
+//    const saleQuant = sale.quantity;
+//    const product = await producstService.getById(id);
+//    if (saleQuant > product.quantity) {
+//      return { code: 422, message: 'Such amount is not permitted to sell' };
+//    }
+//   });
 
 module.exports = {
    checkLength,
