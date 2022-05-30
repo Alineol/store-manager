@@ -68,11 +68,11 @@ describe('2- Busca produtos pelo id(controler)', () => {
       response.status = sinon.stub().returns(response);
       response.json = sinon.stub().returns()
 
-      sinon.stub(productsService, 'getById').resolves({
+      sinon.stub(productsService, 'getById').resolves([{
         "id": 1,
         "name": "Martelo de Thor",
         "quantity": 10
-      })
+      }])
     })
 
     after(() => {
