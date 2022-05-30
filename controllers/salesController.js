@@ -22,7 +22,6 @@ const create = async (req, res) => {
 };
 
 const edit = async (req, res) => {
-  console.log('controller');
   const sale = req.body;
   const { id } = req.params;
   const response = await salesService.edit(sale, id);
