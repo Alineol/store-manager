@@ -70,10 +70,10 @@ describe('Busca produto pelo id(service)', () => {
       productsModel.getById.restore();
     })
 
-    it('retorna um objeto com as chaves id, name e quantity', async() => {
+    it('retorna um  array com um objeto tendo as chaves id, name e quantity', async() => {
       const response = await productsService.getById();
-      expect(response).to.be.an('object');
-      expect(response).to.has.keys('id', 'name', 'quantity')
+      expect(response).to.be.an('array');
+      expect(response[0]).to.has.keys('id', 'name', 'quantity')
     })
   })
 })
