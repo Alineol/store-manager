@@ -59,6 +59,7 @@ describe("08-updateSales", () => {
           .expect("status", 200)
           .then((response) => {
             const { json } = response;
+            console.log(json)
   
             expect(json.length).toBe(1);
   
