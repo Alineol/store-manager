@@ -28,6 +28,7 @@ const checkQuant = async (sales, getById) => sales.map(async (sale) => {
    if (saleQuant > quantity) {
      return { code: 422, message: 'Such amount is not permitted to sell' };
    }
+   return {};
   });
 
 module.exports = {
