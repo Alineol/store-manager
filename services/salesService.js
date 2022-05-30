@@ -1,5 +1,6 @@
 const salessModel = require('../models/salesModel');
-const { checkLength, checkId } = require('../helpers.js/index');
+const { checkLength, checkId, checkQuant } = require('../helpers.js/index');
+const productsService = require('./productsService');
 
 const getAll = async () => {
   const [salessData] = await salessModel.getAll();
@@ -14,6 +15,8 @@ const getById = async (id) => {
 };
 
 const create = async (sales) => {
+  const [checkQuantity] = await Promise.all(await checkQuant(sales, productsService.getById));
+  if (checkQuantity.message) { return checkQuantity; }
   const id = await salessModel.create(sales);
   return {
     id,
