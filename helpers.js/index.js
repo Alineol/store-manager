@@ -20,16 +20,18 @@ const checkId = (result, name) => {
 // };
 // const producstService = require('./productsService');
 
-// const checkQuant = async (sales) => sales.map(async (sale) => {
-//    const id = sale.productId;
-//    const saleQuant = sale.quantity;
-//    const product = await producstService.getById(id);
-//    if (saleQuant > product.quantity) {
-//      return { code: 422, message: 'Such amount is not permitted to sell' };
-//    }
-//   });
+const checkQuant = async (sales, getById) => sales.map(async (sale) => {
+   const id = sale.productId;
+   const saleQuant = sale.quantity;
+   const product = await getById(id);
+   const { quantity } = product[0];
+   if (saleQuant > quantity) {
+     return { code: 422, message: 'Such amount is not permitted to sell' };
+   }
+  });
 
 module.exports = {
    checkLength,
   checkId,
+  checkQuant,
 };
