@@ -1,6 +1,8 @@
 const salessModel = require('../models/salesModel');
-const { checkLength, checkId, checkQuant } = require('../helpers.js/index');
+const { checkLength, checkId, checkQuant, 
+  increaseProductQuantity } = require('../helpers.js/index');
 const productsService = require('./productsService');
+const producstModel = require('../models/productsModel');
 
 const getAll = async () => {
   const [salessData] = await salessModel.getAll();
@@ -15,7 +17,9 @@ const getById = async (id) => {
 };
 
 const create = async (sales) => {
-  const [checkQuantity] = await Promise.all(await checkQuant(sales, productsService.getById));
+  const [checkQuantity] = await Promise.all(
+    await checkQuant(sales, productsService.getById, producstModel.editQuantity),
+);
   if (checkQuantity.message) { return checkQuantity; }
   const id = await salessModel.create(sales);
   return {
@@ -33,10 +37,11 @@ const edit = async (itemUpdated, saleId) => {
 };
 
 const deleteSale = async (id) => {
-  const find = await getById(id);
-  if (find.message) {
-    return find;
+  const sales = await getById(id);
+  if (sales.message) {
+    return sales;
   }
+  await increaseProductQuantity(sales, productsService.getById, producstModel.editQuantity);
   return salessModel.deleteSale(id);
 };
 
