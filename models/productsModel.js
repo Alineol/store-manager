@@ -27,10 +27,16 @@ const getAll = () => connection.execute(
     return connection.execute(query);
   };
 
+  const editQuantity = (id, newQuantity) => {
+    const query = `UPDATE products SET  quantity = ${newQuantity} WHERE id = ${id};`;
+    return connection.execute(query);
+  };
+
 module.exports = {
   getAll,
   getById,
   create,
   edit,
   deleteProduct,
+  editQuantity,
 };
