@@ -24,9 +24,9 @@ const create = async (name, quantity) => {
 };
 
 const edit = async (name, quantity, id) => {
-  const find = await getById(id);
-  if (find.message) {
-    return find;
+  const product = await getById(id);
+  if (product.message) {
+    return product;
   }
   const response = await productsModel.edit(id, name, quantity);
   if (response.affectedRows === 1) {
@@ -35,9 +35,9 @@ const edit = async (name, quantity, id) => {
 };
 
 const deleteProduct = async (id) => {
-  const find = await getById(id);
-  if (find.message) {
-    return find;
+  const product = await getById(id);
+  if (product.message) {
+    return product;
   }
    return productsModel.deleteProduct(id);
 };
