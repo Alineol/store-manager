@@ -7,7 +7,7 @@ No bloco deste projeto somos apresentados aos conceitos de arquitetura de softwa
 
 **Objetivo do projeto**
 
-Desenvolver uma API RESTful utilizando a arquitetura MSC e o sql para a gestão de dados.
+Desenvolver uma API RESTful utilizando a arquitetura MSC e o Mysql para a gestão de dados.
 A API a ser construída corresponde a um sistema de gerenciamento de vendas, onde será possível criar,
 visualizar, deletar e atualizar produtos e vendas.
 
