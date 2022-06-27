@@ -1,3 +1,5 @@
+
+
 DROP DATABASE IF EXISTS StoreManager;
 
 CREATE DATABASE StoreManager;
