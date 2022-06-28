@@ -70,8 +70,6 @@ visualizar, deletar e atualizar produtos e vendas.
 
   :eyes: **De olho nas dicas:** 
   1. Para rodar o projeto desta forma, **obrigatoriamente** você deve ter o `node` instalado em seu computador.
-  2. O avaliador espera que a versão do `node` utilizada seja a 16.
-  
   
  > Para iniciar a aplicação: `npm run dev`
 
